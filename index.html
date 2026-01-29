@@ -1,36 +1,28 @@
 <!DOCTYPE html>
-<html lang="tk">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <style>
-        body { background-color: #000; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; color: white; font-family: sans-serif; }
-    </style>
 </head>
 <body>
-    <div id="loading">Reklama ýüklenýär...</div>
-
     <script>
         const WebApp = window.Telegram.WebApp;
         WebApp.ready();
-        WebApp.expand(); // Ekrany doly açar
 
-        // BLOCK ID: Öz ID-ňizi ýazyň!
-        const AdController = window.Adsgram.init({ blockId: "20977" }); 
+        // ÖNEMLİ: 'YENİ_BLOK_ID' kısmına Adsgram panelindeki numarayı tırnak içinde yaz!
+        const AdController = window.Adsgram.init({ blockId: "21967" }); 
 
-        // WebApp açylan badyna reklamany awtomatiki başladýarys
-        window.onload = function() {
-            AdController.show().then((result) => {
-                if (result.done) {
-                    WebApp.close(); // Reklama gutaranda WebApp ýapylar
-                }
-            }).catch(() => {
-                alert("Reklama ýüklenmedi ýa-da ýapyldy.");
-                WebApp.close();
-            });
-        };
+        // Sayfa açılır açılmaz reklamı başlatır
+        AdController.show().then((result) => {
+            if (result.done) {
+                // Reklam başarıyla izlendi
+                WebApp.close(); 
+            }
+        }).catch((result) => {
+            // Reklam yüklenemedi veya hata oluştu
+            console.error(result);
+            WebApp.close();
+        });
     </script>
 </body>
 </html>
